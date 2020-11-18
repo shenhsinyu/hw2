@@ -1,9 +1,9 @@
 # hw2 -- Object Detection
 ## data
-- dataset
+-- dataset
   Street View House Numbers
-   link: http://ufldl.stanford.edu/housenumbers/
-- data preprocessing
+  link: http://ufldl.stanford.edu/housenumbers/
+-- data preprocessing
   Move you data into `data/custom/train`, if you have validation data, move it to `data/custom/valid`.
   Create a file to `data/custom/train.txt` that contain the training image path, if you have validation data, also create a file named `valid.txt`.
   The annotations are save in .h5 file, run `python3 datapreprocessing.py` and you can turn it to txt files.
