@@ -1,4 +1,4 @@
-# hw1 -- Object Detection
+# hw2 -- Object Detection
 ## data
 - dataset
   Street View House Numbers
