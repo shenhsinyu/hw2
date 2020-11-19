@@ -50,7 +50,7 @@
 ## detect
 - detect object from the test images
 
-  put you test images to `data/samples/images`, after running `$ python3 detect.py`, in output folder it contains images with bounding box and predict.json.
+  put test images to `data/samples/images`, after running `$ python3 detect.py`, in output folder it contains images with bounding box and predict.json.
 
   you can choose weight from checkpoint floder, or conf_thrs and nms_thrs to get the result more accurate.
   
