@@ -35,10 +35,15 @@ def random_resize(images, min_size=288, max_size=448):
     images = F.interpolate(images, size=new_size, mode="nearest")
     return images
 
+def key_func(x):
+    x = os.path.splitext(x)
+    name = x[0]
+    return int(name[20:])
+
 
 class ImageFolder(Dataset):
     def __init__(self, folder_path, img_size=416):
-        self.files = sorted(glob.glob("%s/*.*" % folder_path))
+        self.files = sorted(glob.glob("%s/*.*" % folder_path), key=key_func)
         self.img_size = img_size
 
     def __getitem__(self, index):
