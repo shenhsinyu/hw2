@@ -31,12 +31,12 @@
 ## train
 - run `$ python3 train.py` 
 
-you can change epoch, weight, model...
+  you can change epoch, weight, model...
 
-In this project, model_def = "config/yolov3-custom.cfg", data_config = "config/custom.data"
+  In this project, model_def = "config/yolov3-custom.cfg", data_config = "config/custom.data"
 
 - tensorboard
 
 Training history is in  `logs/` , run the command below.
 
-$ tensorboard --logdir='logs' --port=6006
+ `$ tensorboard --logdir='logs' --port=6006`
