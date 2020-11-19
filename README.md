@@ -53,4 +53,4 @@
   
 - example:
 
-![image]
+  ![image](picture or gif url)
