@@ -23,16 +23,29 @@ from matplotlib.ticker import NullLocator
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--image_folder", type=str, default="data/samples/test", help="path to dataset")
-    parser.add_argument("--model_def", type=str, default="config/yolov3-custom.cfg", help="path to model definition file")#yolov3.cfg
-    parser.add_argument("--weights_path", type=str, default="checkpoints/best/0927.pth", help="path to weights file")#weights/yolov3.weights
-    parser.add_argument("--class_path", type=str, default="data/custom/classes.names", help="path to class label file")#coco.names
-    parser.add_argument("--conf_thres", type=float, default=0.95, help="object confidence threshold")
-    parser.add_argument("--nms_thres", type=float, default=0.2, help="iou thresshold for non-maximum suppression")
-    parser.add_argument("--batch_size", type=int, default=1, help="size of the batches")
-    parser.add_argument("--n_cpu", type=int, default=0, help="number of cpu threads to use during batch generation")
-    parser.add_argument("--img_size", type=int, default=416, help="size of each image dimension")
-    parser.add_argument("--checkpoint_model", type=str, help="path to checkpoint model")
+    parser.add_argument("--image_folder", type=str,
+                        default="data/samples/test", help="path to dataset")
+    parser.add_argument("--model_def", type=str,
+                        default="config/yolov3-custom.cfg",
+                        help="path to model definition file")
+    parser.add_argument("--weights_path", type=str,
+                        default="checkpoints/0927.pth",
+                        help="path to weights file")
+    parser.add_argument("--class_path", type=str,
+                        default="data/custom/classes.names",
+                        help="path to class label file")
+    parser.add_argument("--conf_thres", type=float, default=0.95,
+                        help="object confidence threshold")
+    parser.add_argument("--nms_thres", type=float, default=0.2,
+                        help="iou thresshold for non-maximum suppression")
+    parser.add_argument("--batch_size", type=int, default=1,
+                        help="size of the batches")
+    parser.add_argument("--n_cpu", type=int, default=0,
+                        help="number of cpu threads to use")
+    parser.add_argument("--img_size", type=int, default=416,
+                        help="size of each image dimension")
+    parser.add_argument("--checkpoint_model", type=str,
+                        help="path to checkpoint model")
     opt = parser.parse_args()
     print(opt)
 
@@ -75,7 +88,8 @@ if __name__ == "__main__":
         # Get detections
         with torch.no_grad():
             detections = model(input_imgs)
-            detections = non_max_suppression(detections, opt.conf_thres, opt.nms_thres)
+            detections = non_max_suppression(detections,
+                                             opt.conf_thres, opt.nms_thres)
 
         # Log progress
         current_time = time.time()
@@ -111,50 +125,48 @@ if __name__ == "__main__":
             unique_labels = detections[:, -1].cpu().unique()
             n_cls_preds = len(unique_labels)
             bbox_colors = random.sample(colors, n_cls_preds)
-            
+
             boundingbox = np.array([])
             score = np.array([])
             label = np.array([])
-            
+
             for x1, y1, x2, y2, conf, cls_conf, cls_pred in detections:
 
-                print("\t+ Label: %s, Conf: %.5f" % (classes[int(cls_pred)], cls_conf.item()))
+                print("\t+ Label: %s, Conf: %.5f"
+                      % (classes[int(cls_pred)], cls_conf.item()))
 
                 box_w = x2 - x1
                 box_h = y2 - y1
-                
-                bb = np.array([[int(y1),int(x1),int(y2),int(x2)]])
+
+                bb = np.array([[int(y1), int(x1), int(y2), int(x2)]])
                 boundingbox = np.vstack([boundingbox, bb]) if boundingbox.size else bb
                 score = np.append(score, float(cls_conf))
                 label = np.append(label, int(cls_pred))
                 label = label.astype(int)
                 color = bbox_colors[int(np.where(unique_labels == int(cls_pred))[0])]
                 # Create a Rectangle patch
-                bbox = patches.Rectangle((x1, y1), box_w, box_h, linewidth=2, edgecolor=color, facecolor="none")
+                bbox = patches.Rectangle((x1, y1), box_w, box_h, linewidth=2,
+                                         edgecolor=color, facecolor="none")
                 # Add the bbox to the plot
                 ax.add_patch(bbox)
                 # Add label
-                plt.text(x1,y1,s=classes[int(cls_pred)],color="white",verticalalignment="top",bbox={"color": color, "pad": 0},)
+                plt.text(x1, y1, s=classes[int(cls_pred)], color="white",
+                         verticalalignment="top",
+                         bbox={"color": color, "pad": 0},)
 
-        
         filename = path.split("/")[-1].split(".")[0]
-        
-        p = {'bbox':boundingbox.tolist(), 'score':score.tolist(), 'label':label.tolist()}
+        p = {'bbox': boundingbox.tolist(), 'score': score.tolist(),
+             'label': label.tolist()}
         predict.append(p)
-        #print(predict)
 
         # Save generated image with detections
         plt.axis("off")
         plt.gca().xaxis.set_major_locator(NullLocator())
         plt.gca().yaxis.set_major_locator(NullLocator())
-        
-        plt.savefig(f"output/{filename}.png", bbox_inches="tight", pad_inches=0.0)
+
+        plt.savefig(f"output/{filename}.png", bbox_inches="tight",
+                    pad_inches=0.0)
         plt.close()
 
-    #with open('predict.json', 'w') as f:
-    #    json.dump(predict, f)
-'''
-with open('309551033.json') as f:
-    data = json.load(f)
-print(len(data))
-'''
+    with open('predict.json', 'w') as f:
+        json.dump(predict, f)
