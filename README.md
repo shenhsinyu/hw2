@@ -42,15 +42,20 @@
 
   `$ tensorboard --logdir='logs' --port=6006`
   
+ - checkpoints
+ 
+   In checkpoints folder, it contains each epoch training weight.
+   
+  
 ## detect
 - detect object from the test images
 
-  put you test images to `data/samples/images` 
+  put you test images to `data/samples/images`, after running `$ python3 detect.py`, in output folder it contains images with bounding box and predict.json.
 
-  run `$ python3 detect.py` 
-
-  you can change weight from checkpoint dict, or conf_thrs and nms_thrs to get the result more accurate.
+  you can choose weight from checkpoint floder, or conf_thrs and nms_thrs to get the result more accurate.
   
 - example:
 
   ![image](https://github.com/shenhsinyu/hw2/blob/main/output/1.png)
+ 
+  
