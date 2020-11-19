@@ -128,7 +128,7 @@ if __name__ == "__main__":
                 bb = np.array([[int(y1), int(x1), int(y2), int(x2)]])
                 boundingbox = np.vstack([boundingbox, bb]) if boundingbox.size else bb
                 score = np.append(score, float(cls_conf))
-                label = np.append(label, int(cls_pred))
+                label = np.append(label, int(cls_pred)+1)
                 label = label.astype(int)
                 color = bbox_colors[int(np.where(unique_labels == int(cls_pred))[0])]
                 # Create a Rectangle patch
