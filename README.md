@@ -37,6 +37,6 @@
 
 - tensorboard
 
-Training history is in  `logs/` , run the command below.
+  Training history is in  `logs/` , run the command below.
 
- `$ tensorboard --logdir='logs' --port=6006`
+  `$ tensorboard --logdir='logs' --port=6006`
