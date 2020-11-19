@@ -16,6 +16,7 @@
 
 ## model
 - create custom model
+
   Install the requirements from the link https://github.com/eriklindernoren/PyTorch-YOLOv3
   
   Run the commands below to create a custom model definition, replacing <num-classes> with the number of classes in your dataset. In this project <num-classes>=10
