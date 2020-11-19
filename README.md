@@ -40,3 +40,12 @@
   Training history is in  `logs/` , run the command below.
 
   `$ tensorboard --logdir='logs' --port=6006`
+  
+## detect
+- detect object from the test images
+  put you test images to `data/samples/images` 
+
+  run `$ python3 detect.py` 
+
+  you can change weight from checkpoint dict, or conf_thrs and nms_thrs to get the result more accurate.
+  
