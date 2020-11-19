@@ -29,7 +29,7 @@ if __name__ == "__main__":
     parser.add_argument("--gradient_accumulations", type=int, default=2, help="number of gradient accums before step")
     parser.add_argument("--model_def", type=str, default="config/yolov3-custom.cfg", help="path to model definition file")
     parser.add_argument("--data_config", type=str, default="config/custom.data", help="path to data config file")
-    parser.add_argument("--pretrained_weights", type=str, default='checkpoints/best/0927.pth', help="if specified starts from checkpoint model") #default="weights/darknet53.conv.74",
+    parser.add_argument("--pretrained_weights", type=str, default='checkpoints/best/0927.pth', help="if specified starts from checkpoint model")
     parser.add_argument("--n_cpu", type=int, default=8, help="number of cpu threads to use during batch generation")
     parser.add_argument("--img_size", type=int, default=416, help="size of each image dimension")
     parser.add_argument("--checkpoint_interval", type=int, default=1, help="interval between saving model weights")
@@ -74,7 +74,7 @@ if __name__ == "__main__":
         collate_fn=dataset.collate_fn,
     )
 
-    optimizer = torch.optim.Adam(model.parameters(),lr=0.001)
+    optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
     metrics = [
         "grid_size",
         "loss",
@@ -107,7 +107,7 @@ if __name__ == "__main__":
             if batches_done % opt.gradient_accumulations:
                 # Accumulates gradient before each step
                 optimizer.step()
-                #scheduler = torch.optim.lr_scheduler.StepLR(optimizer, 10, gamma=0.8)
+                # scheduler = torch.optim.lr_scheduler.StepLR(optimizer, 10, gamma=0.8)
                 optimizer.zero_grad()
 
             # ----------------
@@ -173,7 +173,7 @@ if __name__ == "__main__":
                 ap_table += [[c, class_names[c], "%.5f" % AP[i]]]
             print(AsciiTable(ap_table).table)
             print(f"---- mAP {AP.mean()}")
-            mAPlist = np.append(mAPlist,AP.mean())
+            mAPlist = np.append(mAPlist, AP.mean())
         if epoch % opt.checkpoint_interval == 0:
             torch.save(model.state_dict(), f"checkpoints/yolov3_ckpt_%d.pth" % epoch)
     print(mAPlist)
