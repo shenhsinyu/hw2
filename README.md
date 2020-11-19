@@ -14,7 +14,7 @@
   
  - class
  
-   Add class names to data/custom/classes.names. This file should have one row per class name.
+   Add class names to `data/custom/classes.names`. This file should have one row per class name.
 
 ## model
 - create custom model
