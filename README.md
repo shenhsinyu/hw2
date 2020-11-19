@@ -25,6 +25,18 @@
    
    ` $ bash create_custom_model.sh <num-classes>`
    
+   then you will get  `config/yolov3-custom.cfg` and `config/custom.data`
+   
  
 ## train
-- run `python3 train.py` 
+- run `$ python3 train.py` 
+
+you can change epoch, weight, model...
+
+In this project, model_def = "config/yolov3-custom.cfg", data_config = "config/custom.data"
+
+- tensorboard
+
+Training history is in  `logs/` , run the command below.
+
+$ tensorboard --logdir='logs' --port=6006
