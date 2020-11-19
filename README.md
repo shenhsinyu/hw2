@@ -53,4 +53,4 @@
   
 - example:
 
-  ![image](
+  ![image](https://github.com/shenhsinyu/hw2/blob/main/output/1.png)
