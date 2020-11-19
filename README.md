@@ -43,6 +43,7 @@
   
 ## detect
 - detect object from the test images
+
   put you test images to `data/samples/images` 
 
   run `$ python3 detect.py` 
