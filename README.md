@@ -29,7 +29,15 @@
    
    then you will get  `config/yolov3-custom.cfg` and `config/custom.data`
    
+ - se module
  
+   you can add squeeze and excitation module in the model, modify the yolov3-custom.cfg like this:
+   
+    `[se]`
+    `reduction=16`
+    
+    add it after the conv layer.
+    
 ## train
 - run `$ python3 train.py` 
 
