@@ -7,7 +7,7 @@
 - data preprocessing
 
   Move data into `data/custom/train`, if you have validation data, move it to `data/custom/valid`.
-  Create a file to `data/custom/train.txt` that contain the training image path, if you have validation data, also create a file named `valid.txt`.
+  Create a file `data/custom/train.txt` that contain the training image path, if you have validation data, also create a file named `valid.txt`.
   The annotations are save in .h5 file, run `python3 datapreprocessing.py` and you can turn it to txt files. txt files are saved at `data/custom/labels/train`
   One image corresponds to one txt file, each txt files row contain `label_idx x_center y_center width height`
   The coordinates should be scaled [0, 1], and the label_idx should be zero-indexed and correspond to the row number of the class name in data/custom/classes.names.
@@ -21,7 +21,7 @@
 
   Install the requirements from the link https://github.com/eriklindernoren/PyTorch-YOLOv3
   
-  Run the commands below to create a custom model definition, replacing <num-classes> with the number of classes in your dataset. In this project <num-classes>=10
+  Run the commands below to create a custom model definition, replacing <num-classes> with the number of classes in your dataset. In this project num-classes=10
   
    ` $ cd config/`
    
