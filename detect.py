@@ -82,7 +82,7 @@ if __name__ == "__main__":
         current_time = time.time()
         inference_time = datetime.timedelta(seconds=current_time - prev_time)
         prev_time = current_time
-        print("\t+ Batch %d, Inference Time: %s" % (batch_i, inference_time))
+        print("\t+ Batch %d, Inference Time: %s ms" % (batch_i, inference_time.microseconds/100))
 
         # Save image and detections
         imgs.extend(img_paths)
